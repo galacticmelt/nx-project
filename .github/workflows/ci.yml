@@ -19,9 +19,7 @@ jobs:
           node-version: 18
 
       - name: Install
-        run: |
-          ls -la
-          npm install
+        run: npm install
         
       - name: Build 
         uses: mansagroup/nrwl-nx-action@v3
