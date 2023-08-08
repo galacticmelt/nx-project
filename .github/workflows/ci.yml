@@ -18,15 +18,13 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install
+      - name: Install Deps
         run: npm install
         
-      - name: Build 
-        uses: mansagroup/nrwl-nx-action@v3
-        with:
-          targets: build
+      - name: Build App
+        run: npm run build
 
-      - name: Build & push Docker image
+      - name: Build & Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
           image: galacticmelt/users
