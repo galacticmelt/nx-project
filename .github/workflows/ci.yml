@@ -13,11 +13,10 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v3
 
-      - name: Install and Build 
-        run: |
-          ls -la
-          npm install
-          npm run build
+      - name: Build 
+        uses: mansagroup/nrwl-nx-action@v3
+        with:
+          targets: build
 
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
