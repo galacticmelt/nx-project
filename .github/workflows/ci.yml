@@ -1,0 +1,32 @@
+name: build and deploy
+on:
+  push:
+    branches: [global/add-gh-workflow]
+  pull_request:
+    branches: [global/add-gh-workflow]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v3
+
+      - name: Install and Build 
+        run: |
+          ls -la
+          npm install
+          npm run build
+
+      - name: Build & push Docker image
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          image: galacticmelt/users
+          tags: v1, latest
+          registry: registry-url.io
+          dockerfile: apps/users/Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+        
